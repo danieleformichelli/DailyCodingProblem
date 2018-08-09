@@ -12,4 +12,22 @@ object Day2 {
         val totalProduct = numbers.reduce { first, second -> first * second }
         return numbers.map { totalProduct / it }.toIntArray()
     }
+
+    fun solutionWithoutDivision(numbers: IntArray): IntArray {
+        val ret = IntArray(numbers.size)
+
+        var productOfNumberBelowI = 1
+        for (i in 0 until numbers.size) {
+            ret[i] = productOfNumberBelowI
+            productOfNumberBelowI *= numbers[i]
+        }
+
+        var productOfNumberAboveI = 1
+        for (i in numbers.size - 1 downTo 0) {
+            ret[i] *= productOfNumberAboveI
+            productOfNumberAboveI *= numbers[i]
+        }
+
+        return ret
+    }
 }

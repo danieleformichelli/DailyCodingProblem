@@ -24,7 +24,7 @@ class Day2Test(private val result: IntArray, private val numbers: IntArray) {
     }
 
     @Test
-    fun solution() {
-        Assert.assertEquals(String.format("%s should map to %s", Utils.prettyPrint(numbers), Utils.prettyPrint(result)), result, Day2.solution(numbers))
+    fun solutionWithoutDivision() {
+        Assert.assertArrayEquals(String.format("%s should map to %s", Utils.prettyPrint(numbers), Utils.prettyPrint(result)), result, Day2.solutionWithoutDivision(numbers))
     }
 }
