@@ -20,6 +20,6 @@ class Day1Test(private val result: Boolean, private val k: Int, private val numb
 
     @Test
     fun sumTo() {
-        Assert.assertEquals(String.format("%s %s to %d", Utils.prettyPrint(numbers), if (result) "sum up" else "does not sum up", k), result, Day1.sumTo(k, numbers))
+        Assert.assertEquals(String.format("%s %s to %d", Utils.prettyPrint(numbers), if (result) "sum up" else "does not sum up", k), result, Day1.solution(k, numbers))
     }
 }
