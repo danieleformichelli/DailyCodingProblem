@@ -8,8 +8,8 @@ For example, if our input was [1, 2, 3, 4, 5], the expected output would be [120
 Follow-up: what if you can't use division?
 */
 object Day2 {
-    fun solution(numbers: List<Int>): List<Int> {
+    fun solution(numbers: IntArray): IntArray {
         val totalProduct = numbers.reduce { first, second -> first * second }
-        return numbers.map { totalProduct / it }
+        return numbers.map { totalProduct / it }.toIntArray()
     }
 }
