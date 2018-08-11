@@ -1,5 +1,6 @@
 package com.formichelli.dailycodingproblem
 
+import com.formichelli.dailycodingproblem.util.Utils
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith

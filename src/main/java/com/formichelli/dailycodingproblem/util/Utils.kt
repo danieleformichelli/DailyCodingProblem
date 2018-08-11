@@ -1,4 +1,4 @@
-package com.formichelli.dailycodingproblem
+package com.formichelli.dailycodingproblem.util
 
 object Utils {
     fun <T> prettyPrint(iterable: Collection<T>) = iterable.joinToString(",", "[", "]")
