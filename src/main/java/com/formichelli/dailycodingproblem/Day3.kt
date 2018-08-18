@@ -22,7 +22,7 @@ assert deserialize(serialize(node)).left.left.val == 'left.left'
 // NOTE: this solution assumes the value of Node does not contain any ','. Otherwise, escaping is required
 
 object Day3 {
-    fun serializeTree(root: Node<String>?): String = if (root != null) String.format("%s,%s,%s", root.value, serializeTree(root.left), serializeTree(root.right)) else "null"
+    fun <T> serializeTree(root: Node<T>?): String = if (root != null) String.format("%s,%s,%s", root.value.toString(), serializeTree(root.left), serializeTree(root.right)) else "null"
 
     fun deserializeTree(serialized: String): Node<String>? {
         return deserializeTree(serialized.split(','), 0)[0] as Node<String>?
