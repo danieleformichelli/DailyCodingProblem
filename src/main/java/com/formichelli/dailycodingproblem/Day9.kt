@@ -9,6 +9,34 @@ Follow-up: Can you do this in O(N) time and constant space?
 */
 object Day9 {
     fun solution(numbers: IntArray): Int {
-        return 0
+        var max = 0
+
+        numbers.forEachIndexed { i, number ->
+            if (number > 0) {
+                val shouldFlipPrevious = i > 0 && numbers[i - 1] > 0
+                val shouldFlipFollowing = i < numbers.size - 1 && numbers[i + 1] > 0
+
+                flipAdjacents(numbers, i, shouldFlipPrevious, shouldFlipFollowing)
+
+                val maxChoosingNumber = number + solution(numbers)
+                if (maxChoosingNumber > max) {
+                    max = maxChoosingNumber
+                }
+
+                flipAdjacents(numbers, i, shouldFlipPrevious, shouldFlipFollowing)
+            }
+        }
+
+        return max
+    }
+
+    private fun flipAdjacents(numbers: IntArray, index: Int, shouldFlipPrevious: Boolean, shouldFlipFollowing: Boolean) {
+        if (shouldFlipPrevious) {
+            numbers[index - 1] = -numbers[index - 1]
+        }
+        numbers[index] = -numbers[index]
+        if (shouldFlipFollowing) {
+            numbers[index + 1] = -numbers[index + 1]
+        }
     }
 }
