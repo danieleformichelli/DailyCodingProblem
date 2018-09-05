@@ -14,7 +14,26 @@ For example, if N is 4, then there are 5 unique ways:
 What if, instead of being able to climb 1 or 2 steps at a time, you could climb any number from a set of positive integers X? For example, if X = {1, 3, 5}, you could climb 1, 3, or 5 steps at a time.
 */
 object Day12 {
-    fun solution(stepsCount: Int): Int {
-        return 0
+    fun solutionRecursive(stepsCount: Int): Int {
+        return when (stepsCount) {
+            1 -> 1
+            2 -> 2
+            else -> solutionRecursive(stepsCount - 1) + solutionRecursive(stepsCount - 2)
+        }
+    }
+
+    fun solutionIterative(stepsCount: Int): Int {
+        if (stepsCount == 1) {
+            return 1
+        }
+
+        val uniqueWays = IntArray(stepsCount)
+        uniqueWays[0] = 1
+        uniqueWays[1] = 2
+        for (i in 2 until stepsCount) {
+            uniqueWays[i] = uniqueWays[i - 1] + uniqueWays[i - 2]
+        }
+
+        return uniqueWays[stepsCount - 1]
     }
 }
