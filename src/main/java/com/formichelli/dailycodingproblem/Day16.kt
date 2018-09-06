@@ -8,10 +8,21 @@ get_last(i): gets the ith last element from the log. i is guaranteed to be small
 You should be as efficient with time and space as possible.
 */
 object Day16 {
-    fun record(orderId: String): Unit {
-    }
+    class OrderLog(private val N: Int) {
+        private val orderIds = Array(N) { "" }
+        private var nextOrderIndex = 0
 
-    fun getLast(i: Int): String {
-        return ""
+        fun record(orderId: String) {
+            orderIds[nextOrderIndex] = orderId
+            if (++nextOrderIndex == N)
+                nextOrderIndex = 0
+        }
+
+        fun getLast(i: Int): String {
+            return if (nextOrderIndex >= i)
+                orderIds[nextOrderIndex - i]
+            else
+                orderIds[N - (i - nextOrderIndex)]
+        }
     }
 }
