@@ -33,7 +33,66 @@ The name of a file contains at least a period and an extension.
 The name of a directory or sub-directory will not contain a period.
 */
 object Day17 {
+    data class FileSystemNode(val name: String, val parent: FileSystemNode?, val children: MutableSet<FileSystemNode> = mutableSetOf()) {
+        override fun hashCode(): Int {
+            return name.hashCode()
+        }
+    }
+
     fun solution(fileSystem: String): Int {
-        return 0
+        if (fileSystem.isEmpty())
+            return 0
+
+        val fileSeparator = "\n"
+        val isFile = { fileName: String -> fileName.contains(".") }
+
+        var longestPathToFile = 0
+        var currentFileSystemNode = FileSystemNode("", null)
+        var currentFileSystemLevel = -1
+        fileSystem.split(fileSeparator).forEach {
+            val fileLevel = getFileLevel(it)
+            val fileName = it.substring(fileLevel)
+            val fileLevelDifference = fileLevel - currentFileSystemLevel
+            if (fileLevelDifference > 1) {
+                throw IllegalArgumentException("Invalid filesystem")
+            }
+
+            for (i in 0 until -fileLevelDifference + 1) {
+                currentFileSystemNode = currentFileSystemNode.parent ?: throw IllegalArgumentException("Invalid filesystem")
+            }
+
+            val fileNode = FileSystemNode(fileName, currentFileSystemNode)
+            currentFileSystemNode.children.add(fileNode)
+            if (isFile(fileName)) {
+                longestPathToFile = Math.max(longestPathToFile, getPathToFileLength(fileNode))
+                currentFileSystemLevel = fileLevel - 1
+            } else {
+                currentFileSystemNode = fileNode
+                currentFileSystemLevel = fileLevel
+            }
+
+        }
+
+        return longestPathToFile
+    }
+
+    private fun getPathToFileLength(fileNode: FileSystemNode): Int {
+        return if (fileNode.parent?.parent == null) {
+            fileNode.name.length
+        } else {
+            fileNode.name.length + getPathToFileLength(fileNode.parent) + 1
+        }
+    }
+
+    private fun getFileLevel(fileWithLevel: String): Int {
+        val fileLevel = "\t"
+
+        for (i in 0..fileWithLevel.length) {
+            if (!fileWithLevel.startsWith(fileLevel, i)) {
+                return i
+            }
+        }
+
+        throw IllegalArgumentException("fileWithLevel only contains '\\t': $fileWithLevel")
     }
 }
