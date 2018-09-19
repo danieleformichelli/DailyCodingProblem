@@ -1,6 +1,6 @@
 package com.formichelli.dailycodingproblem
 
-import com.formichelli.dailycodingproblem.util.Node
+import com.formichelli.dailycodingproblem.util.ListNode
 
 /*
 Given two singly linked lists that intersect at some point, find the intersecting node. The lists are non-cyclical.
@@ -12,7 +12,38 @@ In this example, assume nodes with the same value are the exact same node object
 Do this in O(M + N) time (where M and N are the lengths of the lists) and constant space.
 */
 object Day20 {
-    fun solution(listA: Node<Int>, listB: Node<Int>): Int {
-        return 0
+    // This solution assumes we can modify the lists
+    fun solution(listA: ListNode<Int>, listB: ListNode<Int>): ListNode<Int>? {
+        // if the 2 lists intersect, the intersection point will be at the same distance from the end
+
+        // O(M)
+        val listALength = listA.length()
+        // O(N)
+        val listBLength = listB.length()
+
+        // move the pointers to be at the same distance from the end
+        // O(M-N)
+        var listAPointer: ListNode<Int>? = listA
+        var listBPointer: ListNode<Int>? = listB
+        if (listALength > listBLength) {
+            for (i in 0 until listALength - listBLength) {
+                listAPointer = listAPointer?.next
+            }
+        } else {
+            for (i in 0 until listBLength - listALength) {
+                listBPointer = listBPointer?.next
+            }
+        }
+
+        // O(N-M)
+        // move the pointers together and compare the nodes
+        while (true) {
+            if (listAPointer == listBPointer) {
+                return listAPointer
+            }
+
+            listAPointer = listAPointer?.next
+            listBPointer = listBPointer?.next
+        }
     }
 }
