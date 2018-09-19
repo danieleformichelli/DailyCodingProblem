@@ -20,7 +20,7 @@ class Day20Test(private val result: Int, private val listA: List<Int>, private v
 
     @Test
     fun solution() {
-        Assert.assertEquals("Intersection point should be $result", result, Day20.solution(listNodeFromList(listA), listNodeFromList(listB))!!.value)
+        Assert.assertEquals("Intersection point of ${listA.joinToString(", ", "[", "]")} and ${listB.joinToString(", ", "[", "]")} should be $result", result, Day20.solution(listNodeFromList(listA), listNodeFromList(listB))!!.value)
     }
 
     private fun listNodeFromList(list: List<Int>): ListNode<Int> {
