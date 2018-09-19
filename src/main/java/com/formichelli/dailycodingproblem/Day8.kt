@@ -1,6 +1,6 @@
 package com.formichelli.dailycodingproblem
 
-import com.formichelli.dailycodingproblem.util.Node
+import com.formichelli.dailycodingproblem.util.TreeNode
 
 /*
 A unival tree (which stands for "universal value") is a tree where all nodes under it have the same value.
@@ -18,11 +18,11 @@ For example, the following tree has 5 unival subtrees:
  1   1
 */
 object Day8 {
-    fun solution(head: Node<Int>): Int {
+    fun solution(head: TreeNode<Int>): Int {
         return univalTreeCount(head)[1]!!
     }
 
-    private fun univalTreeCount(head: Node<Int>?): List<Int?> {
+    private fun univalTreeCount(head: TreeNode<Int>?): List<Int?> {
         if (head == null)
             return listOf(null, 0)
 

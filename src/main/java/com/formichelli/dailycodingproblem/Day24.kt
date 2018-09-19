@@ -1,6 +1,6 @@
 package com.formichelli.dailycodingproblem
 
-import com.formichelli.dailycodingproblem.util.Node
+import com.formichelli.dailycodingproblem.util.TreeNode
 
 /*
 Implement locking in a binary tree. A binary tree node can be locked or unlocked only if all of its descendants or ancestors are not locked.
@@ -13,7 +13,7 @@ unlock, which unlocks the node. If it cannot be unlocked, then it should return 
 You may augment the node to add parent pointers or any other property you would like. You may assume the class is used in a single-threaded program, so there is no need for actual locks or mutexes. Each method should run in O(h), where h is the height of the tree.
 */
 object Day24 {
-    class LockedNode<T>(value: T, left: Node<T>? = null, right: Node<T>? = null) : Node<T>(value, left, right) {
+    class LockedTreeNode<T>(value: T, left: TreeNode<T>? = null, right: TreeNode<T>? = null) : TreeNode<T>(value, left, right) {
         fun isLocked(): Boolean {
             return false
         }
