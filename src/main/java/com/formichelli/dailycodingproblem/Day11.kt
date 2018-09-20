@@ -10,7 +10,7 @@ For example, given the query string de and the set of strings [dog, deer, deal],
 Hint: Try preprocessing the dictionary into a more efficient data structure to speed up queries.
 */
 object Day11 {
-    fun getPrefixSet(searchNode: SearchNode, queryString: String): Set<String> {
+    private fun getPrefixSet(searchNode: SearchNode, queryString: String): Set<String> {
         return getPrefixSet(searchNode, queryString, 0)
     }
 
@@ -42,11 +42,6 @@ object Day11 {
     }
 
     fun solution(query: String, querySet: Set<String>): Set<String> {
-        val searchRoot = SearchNode(0.toChar())
-        for (queryString in querySet) {
-            searchRoot.add(queryString)
-        }
-
-        return getPrefixSet(searchRoot, query)
+        return getPrefixSet(SearchNode(querySet), query)
     }
 }
