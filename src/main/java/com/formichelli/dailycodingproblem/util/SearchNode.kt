@@ -7,11 +7,13 @@ class SearchNode private constructor(val value: Char) {
 
     companion object {
         const val ALPHABET_SIZE = 'z' - 'a' + 2
+        const val STRING_END_INDEX = ALPHABET_SIZE - 1
         const val STRING_END = 0.toChar()
     }
 
     // one children for each letter plus string end
     val children = Array<SearchNode?>(ALPHABET_SIZE) { null }
+
 
     fun add(queryString: String) {
         add(queryString, 0)
@@ -19,7 +21,7 @@ class SearchNode private constructor(val value: Char) {
 
     private fun add(queryString: String, index: Int) {
         if (index == queryString.length) {
-            children[ALPHABET_SIZE - 1] = SearchNode(STRING_END)
+            children[STRING_END_INDEX] = SearchNode(STRING_END)
             return
         }
 
@@ -31,4 +33,8 @@ class SearchNode private constructor(val value: Char) {
 
         children[indexOfChar]?.add(queryString, index + 1)
     }
+
+    fun isLastOfWord() = children[STRING_END_INDEX] != null
+
+    fun getChildren(char: Char) = children[char - 'a']
 }
