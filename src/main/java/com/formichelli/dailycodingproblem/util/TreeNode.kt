@@ -1,6 +1,9 @@
 package com.formichelli.dailycodingproblem.util
 
-open class TreeNode<T>(val value: T, val left: TreeNode<T>? = null, val right: TreeNode<T>? = null) {
+open class TreeNode<T>(val value: T) {
+    open var left: TreeNode<T>? = null
+    open var right: TreeNode<T>? = null
+
     override fun equals(other: Any?): Boolean {
         if (other !is TreeNode<*>)
             return false

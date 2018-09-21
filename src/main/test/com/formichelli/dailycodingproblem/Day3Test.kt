@@ -12,8 +12,16 @@ class Day3Test(private val root: TreeNode<String>?) {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any?>> {
+            val rootNode = TreeNode("root")
+            val leftNode = TreeNode("left")
+            val rightNode = TreeNode("right")
+            val leftLeftNode = TreeNode("left.left")
+            rootNode.left = leftNode
+            rootNode.right = rightNode
+            leftNode.left = leftLeftNode
+
             return listOf(
-                    arrayOf<Any?>(TreeNode("root", TreeNode("left", TreeNode("left.left")), TreeNode("right"))),
+                    arrayOf<Any?>(rootNode),
                     arrayOf<Any?>(null)
             )
         }
