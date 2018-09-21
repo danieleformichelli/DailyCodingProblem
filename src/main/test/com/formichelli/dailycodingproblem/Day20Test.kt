@@ -8,8 +8,6 @@ import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
 class Day20Test(private val result: Int, private val listA: List<Int>, private val listB: List<Int>) {
-    private val nodesMap = HashMap<Int, ListNode<Int>>()
-
     companion object {
         @JvmStatic
         @Parameterized.Parameters
@@ -20,19 +18,7 @@ class Day20Test(private val result: Int, private val listA: List<Int>, private v
 
     @Test
     fun solution() {
-        Assert.assertEquals("Intersection point of ${listA.joinToString(", ", "[", "]")} and ${listB.joinToString(", ", "[", "]")} should be $result", result, Day20.solution(listNodeFromList(listA), listNodeFromList(listB))!!.value)
+        Assert.assertEquals("Intersection point of ${listA.joinToString(", ", "[", "]")} and ${listB.joinToString(", ", "[", "]")} should be $result", result, Day20.solution(ListNode.fromList(listA), ListNode.fromList(listB))!!.value)
     }
 
-    private fun listNodeFromList(list: List<Int>): ListNode<Int> {
-        val listNodeHead = createListNode(list[0])
-        var listNodeTail = listNodeHead
-        list.stream().skip(1).forEach {
-            listNodeTail.next = createListNode(it)
-            listNodeTail = listNodeTail.next!!
-        }
-
-        return listNodeHead
-    }
-
-    private fun createListNode(value: Int) = nodesMap.computeIfAbsent(value) { ListNode(value) }
 }
