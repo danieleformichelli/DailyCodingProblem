@@ -16,7 +16,58 @@ For example, given the list of words ["the", "quick", "brown", "fox", "jumps", "
 "the   lazy   dog"] # 4 extra spaces distributed evenly
 */
 object Day28 {
-    fun solution(string: List<String>): List<String> {
-        return listOf()
+    fun solution(words: List<String>, lineLength: Int): List<String> {
+        val lines = mutableListOf<String>()
+
+        var currentLineIndexStart = 0
+        var currentLineLength = 0
+        words.forEachIndexed { index, word ->
+            currentLineLength += word.length + if (currentLineLength != 0) 1 else 0
+
+            if (currentLineLength > lineLength) {
+                lines.add(justifyLine(words, currentLineIndexStart, index - 1, lineLength))
+                currentLineIndexStart = index
+                currentLineLength = word.length
+            } else if (currentLineLength == lineLength) {
+                lines.add(justifyLine(words, currentLineIndexStart, index, lineLength))
+                currentLineIndexStart = index + 1
+                currentLineLength = 0
+            }
+        }
+
+        if (currentLineLength != 0) {
+            lines.add(justifyLine(words, currentLineIndexStart, words.lastIndex, lineLength))
+        }
+
+        return lines
+    }
+
+    private fun justifyLine(words: List<String>, fromIndex: Int, toIndex: Int, lineLength: Int): String {
+        val wordsCount = toIndex - fromIndex + 1
+        if (wordsCount == 1) {
+            return words[fromIndex].padEnd(lineLength, ' ')
+        }
+
+        var wordsTotalSize = 0
+        for (i in fromIndex..toIndex) {
+            wordsTotalSize += words[i].length
+        }
+
+
+        val totalSpacesCount = lineLength - wordsTotalSize
+        val baseSpacingSize = totalSpacesCount / (wordsCount - 1)
+        val spareSpaces = totalSpacesCount - (wordsCount - 1) * baseSpacingSize
+        val baseSpacing = " ".repeat(baseSpacingSize)
+
+        val lineBuilder = StringBuilder(words[fromIndex])
+        for (i in 1 until wordsCount) {
+            lineBuilder.append(baseSpacing)
+            if (i <= spareSpaces) {
+                lineBuilder.append(' ')
+            }
+            lineBuilder.append(words[fromIndex + i])
+        }
+
+        return lineBuilder.toString()
     }
 }

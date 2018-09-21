@@ -1,6 +1,5 @@
 package com.formichelli.dailycodingproblem
 
-import com.formichelli.dailycodingproblem.util.Utils
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,6 +23,6 @@ class Day11Test(private val result: Set<String>, private val query: String, priv
 
     @Test
     fun solution() {
-        Assert.assertEquals(String.format("Prefix set of %s should be %s", query, Utils.prettyPrint(result)), result, Day11.solution(query, querySet))
+        Assert.assertEquals(String.format("Prefix set of %s should be %s", query, result.toString()), result, Day11.solution(query, querySet))
     }
 }

@@ -23,6 +23,6 @@ class Day26Test(private val result: ListNode<Int>, private val inputList: ListNo
 
     @Test
     fun solution() {
-        Assert.assertEquals("${inputList.toList().joinToString(",", "[", "]")} removing ${k}th last character should be ${result.toList().joinToString(",", "[", "]")}", result.toList(), Day26.solution(inputList, k).toList())
+        Assert.assertEquals("${inputList.toList()} removing ${k}th last character should be ${result.toList()}", result.toList(), Day26.solution(inputList, k).toList())
     }
 }

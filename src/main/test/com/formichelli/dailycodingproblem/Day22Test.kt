@@ -19,6 +19,6 @@ class Day22Test(private val result: List<String>, private val dictionary: Set<St
 
     @Test
     fun solution() {
-        Assert.assertEquals("$sentence is composed of ${result.joinToString(", ", "[", "]")}", result, Day22.solution(dictionary, sentence))
+        Assert.assertEquals("$sentence is composed of $result", result, Day22.solution(dictionary, sentence))
     }
 }
