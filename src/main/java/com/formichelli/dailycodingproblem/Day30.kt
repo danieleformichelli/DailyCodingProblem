@@ -11,6 +11,47 @@ Given the input [3, 0, 1, 3, 0, 5], we can hold 3 units in the first index, 2 in
 */
 object Day30 {
     fun solution(elevationMap: IntArray): Int {
-        return 0
+        // O(N)
+        val maxElevation = elevationMap.max() ?: return 0
+
+        var maxFromLeft = elevationMap.first()
+        var maxFromRight = elevationMap.last()
+        var maxElevationFromLeftIndex = 0
+        var maxElevationFromRightIndex = 0
+        var trappedWater = 0
+
+        // O(N)
+        // measure the water trapped from left side until the highest wall
+        for (i in 0 until elevationMap.size) {
+            if (elevationMap[i] == maxElevation) {
+                maxElevationFromLeftIndex = i
+                break
+            } else if (elevationMap[i] > maxFromLeft) {
+                maxFromLeft = elevationMap[i]
+            } else {
+                trappedWater += maxFromLeft - elevationMap[i]
+            }
+        }
+
+        // O(N)
+        // measure the water trapped from right side until the highest wall
+        for (i in elevationMap.size - 1 downTo 0) {
+            if (elevationMap[i] == maxElevation) {
+                maxElevationFromRightIndex = i
+                break
+            } else if (elevationMap[i] > maxFromRight) {
+                maxFromRight = elevationMap[i]
+            } else {
+                trappedWater += maxFromRight - elevationMap[i]
+            }
+        }
+
+        // O(N)
+        // measure the water trapped between the highest walls (if there is more than one
+        for (i in maxElevationFromLeftIndex + 1 until maxElevationFromRightIndex) {
+            trappedWater += maxElevation - elevationMap[i]
+        }
+
+        return trappedWater
     }
 }
