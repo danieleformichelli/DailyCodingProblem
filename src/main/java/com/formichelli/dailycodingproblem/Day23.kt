@@ -1,6 +1,6 @@
 package com.formichelli.dailycodingproblem
 
-import java.util.*
+import com.formichelli.dailycodingproblem.util.Utils
 
 /*
 You are given an M by N matrix consisting of booleans that represents a board. Each True boolean represents a wall. Each False boolean represents a tile you can walk on.
@@ -27,15 +27,13 @@ object Day23 {
         // mark visited cells so we don't pass again from them (shortest path cannot include twice the same cell)
         board[r][c] = true
 
-        val minFromNextStep = minOf(solution(board, Pair(r - 1, c), end), solution(board, Pair(r + 1, c), end), solution(board, Pair(r, c - 1), end), solution(board, Pair(r, c + 1), end))
+        val minFromNextStep = Utils.minOf(solution(board, Pair(r - 1, c), end), solution(board, Pair(r + 1, c), end), solution(board, Pair(r, c - 1), end), solution(board, Pair(r, c + 1), end))
 
         // unmark visited cells to clean up state for recursive calls
         board[r][c] = false
 
         return if (minFromNextStep != Int.MAX_VALUE) minFromNextStep + 1 else Int.MAX_VALUE
     }
-
-    private fun minOf(vararg numbers: Int) = Arrays.stream(numbers).min().orElse(Int.MAX_VALUE)
 
     private fun isWall(board: Array<BooleanArray>, r: Int, c: Int) = when {
         r < 0 || c < 0 -> true
