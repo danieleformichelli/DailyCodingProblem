@@ -19,33 +19,34 @@ For example, given the sequence [2, 1, 5, 7, 2, 0, 5], your algorithm should pri
 2
 */
 object Day33 {
-    fun MutableList<Int>.addSorted(newValue: Int) {
-        this.forEachIndexed { index, value ->
-            if (newValue < value) {
-                this.add(index, newValue)
-                return
-            }
-        }
-
-        this.add(newValue)
-    }
-
     fun solution(numbersStream: List<Int>): List<Double> {
-        val numbers = LinkedList<Int>()
+        val higherThanMedianFromLowerToHigher = PriorityQueue<Int>()
+        val lowerThanMedianFromHigherToLower = PriorityQueue<Int>(Comparator.comparingInt { -it })
         val medians = ArrayList<Double>(numbersStream.size)
         numbersStream.forEach {
-            numbers.addSorted(it)
-            medians.add(computeMedian(numbers))
+            if (medians.isEmpty() || it > medians.last()) {
+                higherThanMedianFromLowerToHigher.add(it)
+            } else {
+                lowerThanMedianFromHigherToLower.add(it)
+            }
+
+            val runningMedian = when (higherThanMedianFromLowerToHigher.size - lowerThanMedianFromHigherToLower.size) {
+                2 -> {
+                    lowerThanMedianFromHigherToLower.add(higherThanMedianFromLowerToHigher.poll())
+                    (higherThanMedianFromLowerToHigher.peek() + lowerThanMedianFromHigherToLower.peek()) / 2.0
+                }
+                1 -> higherThanMedianFromLowerToHigher.peek().toDouble()
+                0 -> (higherThanMedianFromLowerToHigher.peek() + lowerThanMedianFromHigherToLower.peek()) / 2.0
+                -1 -> lowerThanMedianFromHigherToLower.peek().toDouble()
+                -2 -> {
+                    higherThanMedianFromLowerToHigher.add(lowerThanMedianFromHigherToLower.poll())
+                    (higherThanMedianFromLowerToHigher.peek() + lowerThanMedianFromHigherToLower.peek()) / 2.0
+                }
+                else -> throw RuntimeException("This can never happen")
+            }
+            medians.add(runningMedian)
         }
 
         return medians
-    }
-
-    private fun computeMedian(sortedNumbers: List<Int>) = if (sortedNumbers.size % 2 != 0) {
-        // middle element
-        sortedNumbers[sortedNumbers.size / 2].toDouble()
-    } else {
-        // average of the 2 middle elements
-        (sortedNumbers[sortedNumbers.size / 2] + sortedNumbers[sortedNumbers.size / 2 - 1]) / 2.0
     }
 }
