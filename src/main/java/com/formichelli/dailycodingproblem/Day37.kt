@@ -8,7 +8,23 @@ For example, given the set {1, 2, 3}, it should return {{}, {1}, {2}, {3}, {1, 2
 You may also use a list or array to represent a set.
 */
 object Day37 {
-    fun solution(set: Set<Int>): Set<Set<Int>> {
-        return setOf()
+    fun <T> solution(set: List<T>): Set<Set<T>> {
+        return solutionHelper(set, 0)
+    }
+
+    private fun <T> solutionHelper(set: List<T>, startFrom: Int): Set<Set<T>> {
+        if (startFrom == set.size) {
+            return setOf(setOf())
+        }
+
+        val superSetsOfSubProblem = solutionHelper(set, startFrom + 1)
+        val superSets = superSetsOfSubProblem.toMutableSet()
+        for (superSetOfSubProblem in superSetsOfSubProblem) {
+            val superSetOfSubProblemIncludingElement = superSetOfSubProblem.toMutableSet()
+            superSetOfSubProblemIncludingElement.add(set[startFrom])
+            superSets.add(superSetOfSubProblemIncludingElement)
+        }
+
+        return superSets
     }
 }
