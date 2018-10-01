@@ -8,11 +8,7 @@ Using a function rand5() that returns an integer from 1 to 5 (inclusive) with un
 object Day45 {
     private val rand = Random()
 
-    private fun rand5() {
-        rand.nextInt(5) + 1
-    }
+    private fun rand5(): Int = rand.nextInt(5) + 1
 
-    fun solution(number: IntArray): Int {
-        return 0
-    }
+    fun solution() = (1..7).map { _ -> rand5() }.sum() % 7 + 1
 }
