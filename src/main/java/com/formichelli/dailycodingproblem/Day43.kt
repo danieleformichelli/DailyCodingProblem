@@ -9,17 +9,23 @@ max(), which returns the maximum value in the stack currently. If there are no e
 Each method should run in constant time.
 */
 object Day43 {
-    class MaxStack {
-        fun push(value: Int) {
+    data class MaxStackNode(val value: Int, val maxSoFar: Int, val parent: MaxStackNode?)
 
+    class MaxStack {
+        private var head: MaxStackNode? = null
+
+        fun push(value: Int) {
+            head = MaxStackNode(value, Math.max(value, head?.maxSoFar ?: 0), head)
         }
 
         fun pop(): Int {
-            return 0
+            val topValue = head?.value ?: throw IllegalStateException("Calling pop on an empty stack")
+            head = head?.parent
+            return topValue
         }
 
         fun max(): Int {
-            return 0
+            return head?.maxSoFar ?: throw IllegalStateException("Calling max on an empty stack")
         }
     }
 }
