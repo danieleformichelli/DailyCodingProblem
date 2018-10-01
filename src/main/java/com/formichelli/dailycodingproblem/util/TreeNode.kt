@@ -14,13 +14,13 @@ open class TreeNode<T>(val value: T) {
         if (left == null && other.left != null)
             return false
 
-        if (left?.value?.equals(other.left?.value) != true)
+        if (left != null && left?.equals(other.left) != true)
             return false
 
         if (right == null && other.right != null)
             return false
 
-        if (right?.value?.equals(other.right?.value) != true)
+        if (right != null && right?.equals(other.right) != true)
             return false
 
         return true
