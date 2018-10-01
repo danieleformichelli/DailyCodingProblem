@@ -1,18 +1,57 @@
 package com.formichelli.dailycodingproblem.day41to50
 
-import java.util.*
+import com.formichelli.dailycodingproblem.util.TreeNode
 
 /*
-Using a function rand5() that returns an integer from 1 to 5 (inclusive) with uniform probability, implement a function rand7() that returns an integer from 1 to 7 (inclusive).
+Given pre-order and in-order traversals of a binary tree, write a function to reconstruct the tree.
+
+For example, given the following preorder traversal:
+
+[a, b, d, e, c, f, g]
+
+And the following inorder traversal:
+
+[d, b, e, a, f, c, g]
+
+You should return the following tree:
+
+    a
+   / \
+  b   c
+ / \ / \
+d  e f  g
 */
 object Day48 {
-    private val rand = Random()
-
-    private fun rand5() {
-        rand.nextInt(5) + 1
+    fun <T> solution(preOrder: List<T>, inOrder: List<T>): TreeNode<T> {
+        return solutionHelper(preOrder, 0, preOrder.size - 1, inOrder, 0, inOrder.size - 1)!!
     }
 
-    fun solution(number: IntArray): Int {
-        return 0
+    private fun <T> solutionHelper(preOrder: List<T>, preOrderFrom: Int, preOrderTo: Int, inOrder: List<T>, inOrderFrom: Int, inOrderTo: Int): TreeNode<T> {
+        // split the problem in subproblems
+
+        // the root of the tree is the first element of the preorder traversal
+        val rootNode = TreeNode(preOrder[preOrderFrom])
+
+        if (preOrderFrom == preOrderTo) {
+            return rootNode
+        }
+
+        // the element of the left side of the tree in the inorder traversal will be the element up to the tree root
+        val inOrderSplitIndex = inOrder.indexOf(rootNode.value)
+        val leftSideSize = inOrderSplitIndex - inOrderFrom
+        val rightSideSize = inOrderTo - inOrderSplitIndex
+
+        // the element of the left side of the tree in the preorder will be the first leftSideSize after the first one
+        val preOrderSplitIndex = preOrderFrom + leftSideSize + 1
+
+        if (leftSideSize > 0) {
+            rootNode.left = solutionHelper(preOrder, preOrderFrom + 1, preOrderSplitIndex - 1, inOrder, inOrderFrom, inOrderSplitIndex - 1)
+        }
+
+        if (rightSideSize > 0) {
+            rootNode.right = solutionHelper(preOrder, preOrderSplitIndex, preOrderTo, inOrder, inOrderSplitIndex + 1, inOrderTo)
+        }
+
+        return rootNode
     }
 }

@@ -7,7 +7,7 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class Day46Test(private val result: TreeNode<Char>, private val preOrder: List<Char>, private val inOrder: List<Char>) {
+class Day48Test(private val result: TreeNode<Char>, private val preOrder: List<Char>, private val inOrder: List<Char>) {
     companion object {
         @JvmStatic
         @Parameterized.Parameters
@@ -59,6 +59,6 @@ class Day46Test(private val result: TreeNode<Char>, private val preOrder: List<C
 
     @Test
     fun solution() {
-        Assert.assertEquals("PreOrder $preOrder and InOrder $inOrder should map to $result", result, Day46.solution(preOrder, inOrder))
+        Assert.assertEquals("PreOrder $preOrder and InOrder $inOrder should map to $result", result, Day48.solution(preOrder, inOrder))
     }
 }
