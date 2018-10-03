@@ -10,5 +10,12 @@ object Day45 {
 
     private fun rand5(): Int = rand.nextInt(5) + 1
 
-    fun solution() = (1..7).map { _ -> rand5() }.sum() % 7 + 1
+    fun solution(): Int {
+        var rand25 = 25
+        while (rand25 >= 22) {
+            rand25 = 5 * (rand5() - 1) + rand5()
+        }
+
+        return rand25 % 7
+    }
 }

@@ -13,7 +13,7 @@ class Day45Test {
         }
 
         for (i in 0 until 7) {
-            Assert.assertEquals("Frequency of ${i + 1} should be around ${1 / 7.0}", 1 / 7.0, frequency[i] / samples.toDouble(), 0.01)
+            Assert.assertEquals("Frequency of ${i + 1} should be around ${1 / 7.0}", 1 / 7.0, frequency[i] / samples.toDouble(), 0.005)
         }
     }
 }
