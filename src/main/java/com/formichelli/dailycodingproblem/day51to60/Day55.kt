@@ -17,7 +17,4 @@ object Day55 {
             return ""
         }
     }
-
-    fun solution(table: Array<IntArray>) {
-    }
 }
