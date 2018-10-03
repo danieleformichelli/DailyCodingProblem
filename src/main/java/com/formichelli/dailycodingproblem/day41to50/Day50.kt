@@ -17,7 +17,13 @@ For example, given the following tree:
 You should return 45, as it is (3 + 2) * (4 + 5).
 */
 object Day50 {
-    fun solution(expression: TreeNode<Int>): Int {
-        return 0
+    fun solution(expression: TreeNode<Char>): Int {
+        return when (expression.value) {
+            '+' -> solution(expression.left!!) + solution(expression.right!!)
+            '-' -> solution(expression.left!!) - solution(expression.right!!)
+            '*' -> solution(expression.left!!) * solution(expression.right!!)
+            '/' -> solution(expression.left!!) / solution(expression.right!!)
+            else -> expression.value - '0'
+        }
     }
 }
