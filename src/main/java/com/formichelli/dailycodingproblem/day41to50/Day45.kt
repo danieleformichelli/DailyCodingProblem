@@ -11,11 +11,13 @@ object Day45 {
     private fun rand5(): Int = rand.nextInt(5) + 1
 
     fun solution(): Int {
-        var rand25 = 25
-        while (rand25 >= 22) {
+        var rand25: Int
+        do {
+            // generate a random number between 1 and 25
             rand25 = 5 * (rand5() - 1) + rand5()
-        }
+        } while (rand25 >= 22) // discard result if it is not between 1 and 21
 
+        // move to [1,21] to [1,7] interval using modulo 7
         return rand25 % 7
     }
 }
