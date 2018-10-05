@@ -1,12 +1,13 @@
 package com.formichelli.dailycodingproblem.util
 
-data class ListNode<T>(val value: T, var next: ListNode<T>? = null) {
+data class ListNode<T>(val value: T, var next: ListNode<T>? = null, var prev: ListNode<T>? = null) {
     companion object {
         fun <T> fromList(list: List<T>): ListNode<T> {
             val head = ListNode(list.first())
             var tail = head
             list.stream().skip(1).forEach {
                 tail.next = ListNode(it)
+                tail.next?.prev = tail
                 tail = tail.next!!
             }
 
