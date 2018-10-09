@@ -9,6 +9,39 @@ Given the multiset {15, 5, 20, 10, 35}, it would return false, since we can't sp
 */
 object Day60 {
     fun solution(numbers: List<Int>): Boolean {
-        return true
+        return solutionHelper(numbers, BooleanArray(numbers.size), 0)
+    }
+
+    fun solutionHelper(numbers: List<Int>, splitIndexes: BooleanArray, currentIndex: Int): Boolean {
+        if (currentIndex == numbers.size) {
+            return false
+        }
+
+        if (sumMatches(numbers, splitIndexes)) {
+            return true
+        }
+
+        splitIndexes[currentIndex] = true
+        val result = solutionHelper(numbers, splitIndexes, currentIndex + 1)
+        if (result) {
+            return true
+        }
+
+        splitIndexes[currentIndex] = false
+        return solutionHelper(numbers, splitIndexes, currentIndex + 1)
+    }
+
+    private fun sumMatches(numbers: List<Int>, splitIndexes: BooleanArray): Boolean {
+        var trueSum = 0
+        var falseSum = 0
+        numbers.forEachIndexed { index, number ->
+            if (splitIndexes[index]) {
+                trueSum += number
+            } else {
+                falseSum += number
+            }
+        }
+
+        return trueSum == falseSum
     }
 }
