@@ -10,7 +10,23 @@ Down, then right
 Given a 5 by 5 matrix, there are 70 ways to get to the bottom-right.
 */
 object Day62 {
-    fun solution(N: Int, M: Int) : Int {
-        return 0
+    fun solution(N: Int, M: Int): Int {
+        return solutionHelper(Array(N) { IntArray(M) }, 0, 0)
+    }
+
+    private fun solutionHelper(partialSolutions: Array<IntArray>, row: Int, column: Int): Int {
+        if (row == partialSolutions.lastIndex && column == partialSolutions[row].lastIndex) {
+            return 1
+        }
+
+        if (row > partialSolutions.lastIndex) {
+            return 0
+        }
+
+        if (column > partialSolutions[row].lastIndex) {
+            return 0
+        }
+
+        return solutionHelper(partialSolutions, row + 1, column) + solutionHelper(partialSolutions, row, column + 1)
     }
 }
