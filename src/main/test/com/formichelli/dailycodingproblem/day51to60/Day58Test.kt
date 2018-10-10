@@ -11,8 +11,8 @@ class Day58Test(private val result: Int, private val numbers: IntArray, private 
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any?>> {
-            return listOf<Array<Any?>>(
+        fun data(): Collection<Array<Any>> {
+            return listOf<Array<Any>>(
                     arrayOf(-1, intArrayOf(13, 18, 25, 2, 8, 10), 1),
                     arrayOf(0, intArrayOf(13, 18, 25, 2, 8, 10), 13),
                     arrayOf(1, intArrayOf(13, 18, 25, 2, 8, 10), 18),

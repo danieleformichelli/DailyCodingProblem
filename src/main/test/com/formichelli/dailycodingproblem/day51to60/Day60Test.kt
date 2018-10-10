@@ -10,8 +10,8 @@ class Day60Test(private val result: Boolean, private val numbers: List<Int>) {
     companion object {
         @JvmStatic
         @Parameterized.Parameters
-        fun data(): Collection<Array<Any?>> {
-            return listOf<Array<Any?>>(
+        fun data(): Collection<Array<Any>> {
+            return listOf(
                     arrayOf(true, listOf(15, 5, 20, 10, 35, 15, 10)),
                     arrayOf(false, listOf(15, 5, 20, 10, 35)))
         }
