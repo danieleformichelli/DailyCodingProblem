@@ -23,7 +23,7 @@ d  e f  g
 */
 object Day48 {
     fun <T> solution(preOrder: List<T>, inOrder: List<T>): TreeNode<T> {
-        return solutionHelper(preOrder, 0, preOrder.size - 1, inOrder, 0, inOrder.size - 1)!!
+        return solutionHelper(preOrder, 0, preOrder.size - 1, inOrder, 0, inOrder.size - 1)
     }
 
     private fun <T> solutionHelper(preOrder: List<T>, preOrderFrom: Int, preOrderTo: Int, inOrder: List<T>, inOrderFrom: Int, inOrderTo: Int): TreeNode<T> {
