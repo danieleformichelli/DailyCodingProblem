@@ -9,6 +9,15 @@ You can assume the list has at least three integers.
 */
 object Day69 {
     fun solution(numbers: List<Int>): Int {
-        return 0
+        val sortedNumbers = numbers.sorted()
+        val biggestNumber = sortedNumbers.last()
+
+        return if (biggestNumber >= 0) {
+            val smallestTwoProduct = sortedNumbers[0] * sortedNumbers[1]
+            val secondAndThirdBiggestTwoProduct = sortedNumbers[sortedNumbers.size - 2] * sortedNumbers[sortedNumbers.size - 3]
+            biggestNumber * Math.max(smallestTwoProduct, secondAndThirdBiggestTwoProduct)
+        } else {
+            sortedNumbers[sortedNumbers.size - 1] * sortedNumbers[sortedNumbers.size - 2] * sortedNumbers[sortedNumbers.size - 3]
+        }
     }
 }
