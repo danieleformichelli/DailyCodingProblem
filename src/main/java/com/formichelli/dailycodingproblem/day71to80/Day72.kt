@@ -23,7 +23,56 @@ A
 Should return null, since we have an infinite loop.
 */
 object Day72 {
-    fun solution(nodeLetters: List<Char>, edgesList: List<Pair<Int, Int>>): Int {
-        return 0
+    fun solution(nodeLetters: String, edgesList: List<Pair<Int, Int>>): Int {
+        var maxValuePath = 0
+        val visitedLetters = BooleanArray(nodeLetters.length)
+        val lettersCount = HashMap<Char, Int>()
+        val edgesMap = HashMap<Int, MutableSet<Int>>()
+        edgesList.forEach { edge ->
+            edgesMap.computeIfAbsent(edge.first) { HashSet() }.add(edge.second)
+        }
+
+        for (index in 0 until visitedLetters.size) {
+            val valuePath = solutionHelper(nodeLetters, visitedLetters, edgesMap, index, lettersCount)
+            if (valuePath == -1) {
+                return -1
+            } else if (valuePath > maxValuePath) {
+                maxValuePath = valuePath
+            }
+        }
+
+        return maxValuePath
+    }
+
+    private fun solutionHelper(nodeLetters: String, visitedLetters: BooleanArray, edgesMap: HashMap<Int, MutableSet<Int>>, index: Int, lettersCount: HashMap<Char, Int>): Int {
+        if (visitedLetters[index]) {
+            return -1
+        }
+
+        visitedLetters[index] = true
+        val letter = nodeLetters[index]
+        val letterCount = lettersCount.getOrDefault(letter, 0)
+        lettersCount[letter] = letterCount + 1
+
+        var maxValuePath = 0
+        val edges = edgesMap[index].orEmpty()
+        if (edges.isEmpty()) {
+            // calculate valuePath
+            maxValuePath = lettersCount.values.stream().mapToInt { it }.max().orElse(0)
+        } else {
+            edges.forEach {
+                val valuePath = solutionHelper(nodeLetters, visitedLetters, edgesMap, it, lettersCount)
+                if (valuePath == -1) {
+                    return -1
+                } else if (valuePath > maxValuePath) {
+                    maxValuePath = valuePath
+                }
+            }
+        }
+
+        visitedLetters[index] = false
+        lettersCount[letter] = letterCount
+
+        return maxValuePath
     }
 }
