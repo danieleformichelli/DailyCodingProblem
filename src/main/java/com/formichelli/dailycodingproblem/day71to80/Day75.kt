@@ -7,6 +7,6 @@ For example, given the array [0, 8, 4, 12, 2, 10, 6, 14, 1, 9, 5, 13, 3, 11, 7, 
 */
 object Day75 {
     fun solution(numbers: IntArray): Int {
-        return 0
+        TODO()
     }
 }

@@ -23,6 +23,6 @@ And there are 4 12's in the table.
 */
 object Day74 {
     fun solution(N: Int, X: Int): Int {
-        return 0
+        TODO()
     }
 }

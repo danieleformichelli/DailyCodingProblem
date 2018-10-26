@@ -29,6 +29,6 @@ Your function should return 3, since we would need to remove all the columns to 
 */
 object Day76 {
     fun solution(letters: Array<CharArray>): Int {
-        return 0
+        TODO()
     }
 }
