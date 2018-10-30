@@ -23,6 +23,16 @@ And there are 4 12's in the table.
 */
 object Day74 {
     fun solution(N: Int, X: Int): Int {
-        TODO()
+        var productCount = 0
+        for (i in 1 .. N) {
+            for (j in 1 .. i) {
+                if (i * j == X) {
+                    // since the matrix is symmetric, only check half of the table and multiply by 2 if not on the diagonal
+                    productCount += if (i == j) 1 else 2
+                }
+            }
+        }
+
+        return productCount
     }
 }
