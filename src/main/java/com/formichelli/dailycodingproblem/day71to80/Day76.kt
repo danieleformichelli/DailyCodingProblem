@@ -29,6 +29,25 @@ Your function should return 3, since we would need to remove all the columns to 
 */
 object Day76 {
     fun solution(letters: Array<CharArray>): Int {
-        TODO()
+        if (letters.isEmpty()) {
+            return 0
+        }
+
+        val columnsCount = letters[0].size
+        var columnsToBeRemoved = 0
+        var lastLetter = 'a'
+        for (column in 0 until columnsCount) {
+            for (row in 0 until letters.size) {
+                if (letters[row][column] < lastLetter) {
+                    ++columnsToBeRemoved
+                    break
+                } else {
+                    lastLetter = letters[row][column]
+                }
+            }
+            lastLetter = 'a'
+        }
+
+        return columnsToBeRemoved
     }
 }
