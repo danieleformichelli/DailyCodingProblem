@@ -1,22 +1,41 @@
 package com.formichelli.dailycodingproblem.day81to90
 
-import java.util.*
-
 /*
 Using a read7() method that returns 7 characters from a file, implement readN(n) which reads n characters.
 
 For example, given a file with the content “Hello world”, three read7() returns “Hello w”, “orld” and then “”.
 */
 object Day82 {
-    private val rand = Random()
-    private fun rand7() = rand.nextInt(7) + 1
+    class FileReader7(private val fileContent: String) {
+        private var currentIndex = 0
+        fun read7(): String {
+            if (currentIndex >= fileContent.length) {
+                return ""
+            }
 
-    fun solution(): Int {
-        var rand5: Int
-        do {
-            rand5 = rand7()
-        } while (rand5 !in 1..5)
+            val nextIndex = Math.min(currentIndex + 7, fileContent.length)
+            val ret = fileContent.substring(currentIndex, nextIndex)
+            currentIndex = nextIndex
+            return ret
+        }
+    }
 
-        return rand5
+    class FileReader(private val fileReader: FileReader7) {
+        private var buffer = StringBuffer()
+        fun readN(n: Int): String {
+            while (buffer.length < n) {
+                val read = fileReader.read7()
+                if (read.isEmpty()) {
+                    break
+                }
+
+                buffer.append(read)
+            }
+
+            val lastIndexToReturn = Math.min(n, buffer.length)
+            val ret = buffer.substring(0, lastIndexToReturn)
+            buffer.delete(0, lastIndexToReturn)
+            return ret
+        }
     }
 }
