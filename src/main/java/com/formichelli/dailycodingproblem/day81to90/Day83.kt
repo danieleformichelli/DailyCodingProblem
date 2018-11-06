@@ -21,6 +21,15 @@ should become:
   f e  d
 */
 object Day83 {
-    fun <T> solution(root: TreeNode<T>) {
+    fun <T> solution(root: TreeNode<T>?) {
+        if (root == null) {
+            return
+        }
+
+        val tmp = root.left
+        root.left = root.right
+        root.right = tmp
+        solution(root.left)
+        solution(root.right)
     }
 }
