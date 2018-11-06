@@ -8,7 +8,23 @@ For example, given the array [10, 5, 7], you should return true, since we can mo
 Given the array [10, 5, 1], you should return false, since we can't modify any one element to get a non-decreasing array.
 */
 object Day79 {
-    fun <T> solution(numbers: IntArray): Boolean {
-        TODO()
+    fun solution(numbers: IntArray): Boolean {
+        var modified = false
+        for (i in 0 until numbers.size - 1) {
+            if (numbers[i] > numbers[i + 1]) {
+                if (modified) {
+                    return false
+                }
+
+                when {
+                    i == 0 -> numbers[i] = Int.MIN_VALUE
+                    numbers[i - 1] <= numbers[i + 1] -> numbers[i] = numbers[i - 1]
+                    else -> numbers[i + 1] = numbers[i]
+                }
+                modified = true
+            }
+        }
+
+        return true
     }
 }

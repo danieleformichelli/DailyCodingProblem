@@ -19,6 +19,6 @@ class Day78Test(private val result: ListNode<Int>, private val lists: List<ListN
 
     @Test
     fun solution() {
-        Assert.assertEquals("Merged sorted list should be", result.toList(), Day78.solution(lists)!!.toList())
+        Assert.assertEquals("Merged sorted list should be ${result.toList()}", result.toList(), Day78.solution(lists)!!.toList())
     }
 }
