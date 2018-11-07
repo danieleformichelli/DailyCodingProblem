@@ -14,6 +14,33 @@ For example, this matrix has 4 islands.
 */
 object Day84 {
     fun solution(matrix: Array<BooleanArray>): Int {
-        TODO()
+        val islands = Array(matrix.size) { BooleanArray(matrix[0].size) }
+
+        var islandCount = 0
+        for (row in 0 until matrix.size) {
+            for (col in 0 until matrix[row].size) {
+                if (matrix[row][col] && !islands[row][col]) {
+                    // we are on land and it has not been marked as island yet
+                    ++islandCount
+
+                    // mark the island so that it is not counted again
+                    markIsland(matrix, islands, row, col)
+                }
+            }
+        }
+
+        return islandCount
+    }
+
+    private fun markIsland(matrix: Array<BooleanArray>, islands: Array<BooleanArray>, row: Int, col: Int) {
+        if (row in 0 until matrix.size && col in 0 until matrix[row].size && matrix[row][col]) {
+            islands[row][col] = true
+
+            // clear rest of island
+            markIsland(matrix, islands, row, col + 1)
+            markIsland(matrix, islands, row + 1, col - 1)
+            markIsland(matrix, islands, row + 1, col)
+            markIsland(matrix, islands, row + 1, col + 1)
+        }
     }
 }
