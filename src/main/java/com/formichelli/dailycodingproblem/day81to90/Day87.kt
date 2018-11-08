@@ -23,7 +23,7 @@ A N B
 is considered valid.
 */
 object Day87 {
-    fun solution(rules: String): Boolean {
+    fun solution(rules: List<String>): Boolean {
         TODO()
     }
 }

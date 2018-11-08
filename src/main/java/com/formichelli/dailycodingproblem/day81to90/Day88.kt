@@ -5,6 +5,13 @@ Implement division of two positive integers without using the division, multipli
 */
 object Day88 {
     fun solution(dividend: Int, divisor: Int): Int {
-        TODO()
+        var quotient = 0
+        var remainingDividend = dividend
+        while (remainingDividend >= divisor) {
+            remainingDividend -= divisor
+            ++quotient
+        }
+
+        return quotient
     }
 }
