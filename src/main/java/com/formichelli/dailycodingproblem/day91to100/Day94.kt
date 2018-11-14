@@ -7,6 +7,19 @@ Given a binary tree of integers, find the maximum path sum between two nodes. Th
 */
 object Day94 {
     fun solution(root: TreeNode<Int>): Int {
-        TODO()
+        return solutionHelper(root).second
+    }
+
+    fun solutionHelper(node: TreeNode<Int>?): Pair<Int, Int> {
+        if (node == null) {
+            return Pair(0, 0)
+        }
+
+        val maximumPathFromLeft = solutionHelper(node.right)
+        val maximumPathFromRight = solutionHelper(node.left)
+
+        val maximumIncludingNode = Math.max(Math.max(maximumPathFromLeft.first, maximumPathFromRight.first), 0) + node.value
+        val maximumOfSubTree = Math.max(maximumIncludingNode, Math.max(maximumPathFromLeft.second, maximumPathFromRight.second))
+        return Pair(maximumIncludingNode, maximumOfSubTree)
     }
 }
