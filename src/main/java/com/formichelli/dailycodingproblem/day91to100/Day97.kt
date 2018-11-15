@@ -1,5 +1,7 @@
 package com.formichelli.dailycodingproblem.day91to100
 
+import java.util.*
+
 /*
 Write a map implementation with a get function that lets you retrieve the value of a key at a particular time.
 
@@ -23,13 +25,27 @@ d.set(1, 2, 0) # set key 1 to value 2 at time 0
 d.get(1, 0) # get key 1 at time 0 should be 2
 */
 object Day97 {
-    class TimeMap<T> {
-        fun set(key: String, value: T, time: Int) {
-            TODO()
+    class TimeMap<K, V> {
+        private val timeMap = HashMap<K, TreeMap<Int, V>>()
+
+        fun set(key: K, value: V, time: Int) {
+            val queue = timeMap.computeIfAbsent(key) { TreeMap() }
+            queue[time] = value
         }
 
-        fun get(key: String, time: Int) : T {
-            TODO()
+        fun get(key: K, time: Int): V? {
+            val queue = timeMap[key] ?: return null
+
+            // should use a sorted list and a binary search to reduce complexity from O(N) to O(logN)
+            var lastValue: V? = null
+            queue.forEach queueFor@{
+                if (it.key > time)
+                    return@queueFor
+
+                lastValue = it.value
+            }
+
+            return lastValue
         }
     }
 }
