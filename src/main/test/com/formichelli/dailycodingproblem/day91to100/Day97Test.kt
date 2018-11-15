@@ -5,10 +5,10 @@ import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
-data class Test97Input(val getOrSet: Boolean, val key: Int, val value: Int?, val time: Int)
-
 @RunWith(Parameterized::class)
 class Day97Test(private val result: List<Int?>, private val inputs: List<Test97Input>) {
+    data class Test97Input(val getOrSet: Boolean, val key: Int, val value: Int?, val time: Int)
+
     companion object {
         @JvmStatic
         @Parameterized.Parameters
