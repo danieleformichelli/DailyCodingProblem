@@ -9,6 +9,30 @@ Your algorithm should run in O(n) complexity.
 */
 object Day99 {
     fun solution(numbers: IntArray): Int {
-        TODO()
+        val forwardConsecutiveSequenceLength = HashMap<Int, Int>()
+        val backwardConsecutiveSequenceLength = HashMap<Int, Int>()
+
+        var longestConsecutiveSequenceLength = 0
+        for (number in numbers) {
+            if (forwardConsecutiveSequenceLength[number] != null) {
+                // already processed
+                continue
+            }
+
+            // check if we are near to a sequence
+            val forwardConsecutiveSequenceLengthFromNumberPlusOne = forwardConsecutiveSequenceLength.getOrDefault(number + 1, 0)
+            val backwardConsecutiveSequenceLengthFromNumberPlusOne = backwardConsecutiveSequenceLength.getOrDefault(number - 1, 0)
+
+            forwardConsecutiveSequenceLength[number] = forwardConsecutiveSequenceLengthFromNumberPlusOne + 1
+            backwardConsecutiveSequenceLength[number] = backwardConsecutiveSequenceLengthFromNumberPlusOne + 1
+
+            val consecutiveSequenceLength = forwardConsecutiveSequenceLengthFromNumberPlusOne + backwardConsecutiveSequenceLengthFromNumberPlusOne + 1
+            forwardConsecutiveSequenceLength[number + forwardConsecutiveSequenceLengthFromNumberPlusOne] = consecutiveSequenceLength
+            backwardConsecutiveSequenceLength[number - forwardConsecutiveSequenceLengthFromNumberPlusOne] = consecutiveSequenceLength
+
+            longestConsecutiveSequenceLength = Math.max(longestConsecutiveSequenceLength, consecutiveSequenceLength)
+        }
+
+        return longestConsecutiveSequenceLength
     }
 }
