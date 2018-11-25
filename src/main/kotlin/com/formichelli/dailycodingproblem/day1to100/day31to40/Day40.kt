@@ -10,19 +10,20 @@ Do this in O(N) time and O(1) space.
 object Day40 {
     fun solution(numbers: IntArray): Int {
         val bitCount = 32
+        val repeatCount = 3
 
         // count how many times each bit is set
         val bitSum = IntArray(bitCount)
         for (number in numbers) {
-            for (i in 0 until 32) {
+            for (i in 0 until bitCount) {
                 bitSum[i] += number.shr(i).and(1)
             }
         }
 
         // consider the bits which don't appear a multiple of 4 times
         var ret = 0
-        for (i in 0 until 32) {
-            ret = ret.or((bitSum[i] % 3).shl(i))
+        for (i in 0 until bitCount) {
+            ret = ret.or((bitSum[i] % repeatCount).shl(i))
         }
 
         return ret
