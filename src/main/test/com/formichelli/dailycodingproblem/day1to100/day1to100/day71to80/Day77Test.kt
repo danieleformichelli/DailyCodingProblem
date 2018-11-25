@@ -1,5 +1,6 @@
 package com.formichelli.dailycodingproblem.day1to100.day1to100.day71to80
 
+import com.formichelli.dailycodingproblem.day71to80.Day77
 import org.junit.Assert
 import org.junit.Test
 import org.junit.runner.RunWith
