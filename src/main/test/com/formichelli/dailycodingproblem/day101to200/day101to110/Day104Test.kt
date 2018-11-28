@@ -13,7 +13,10 @@ class Day104Test(private val result: Boolean, private val list: ListNode<Int>) {
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> {
             return listOf(
-                    arrayOf(true, ListNode.fromList(listOf(1, 3, 4, 3, 1))))
+                    arrayOf(true, ListNode.fromList(listOf(1, 3, 4, 3, 1))),
+                    arrayOf(true, ListNode.fromList(listOf(1, 3, 4, 4, 3, 1))),
+                    arrayOf(false, ListNode.fromList(listOf(1, 3, 4, 5, 3, 1))),
+                    arrayOf(false, ListNode.fromList(listOf(1, 3, 4, 2, 1))))
         }
     }
 

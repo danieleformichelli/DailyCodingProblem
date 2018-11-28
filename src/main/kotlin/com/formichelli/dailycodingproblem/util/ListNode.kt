@@ -36,4 +36,19 @@ data class ListNode<T>(val value: T, var next: ListNode<T>? = null, var prev: Li
 
         return list
     }
+
+    override fun toString(): String {
+        val builder = StringBuilder()
+        builder.append('[')
+        var node: ListNode<T>? = this
+        while (node != null) {
+            builder.append(node.value)
+            node = node.next
+            if (node != null) {
+                builder.append(", ")
+            }
+        }
+        builder.append(']')
+        return builder.toString()
+    }
 }

@@ -9,6 +9,26 @@ For example, 1 -> 4 -> 3 -> 4 -> 1 returns true while 1 -> 4 returns false.
 */
 object Day104 {
     fun solution(list: ListNode<Int>): Boolean {
-        TODO()
+        // assume singly linked
+        return solutionHelper(list, list) != null
+    }
+
+    private fun solutionHelper(currentNode: ListNode<Int>?, head: ListNode<Int>): ListNode<Int>? {
+        if (currentNode == null) {
+            return head
+        }
+
+
+        val nodeToCompareWith = solutionHelper(currentNode.next, head)
+        return if (currentNode.value == nodeToCompareWith?.value) {
+            if (nodeToCompareWith.next == null) {
+                // completed, return non null to notify success
+                return ListNode(Int.MAX_VALUE)
+            } else {
+                nodeToCompareWith.next
+            }
+        } else {
+            null
+        }
     }
 }
