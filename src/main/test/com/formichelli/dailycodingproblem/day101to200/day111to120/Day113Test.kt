@@ -6,21 +6,23 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class Day113Test(private val result: String, private val words: String) {
+class Day113Test(private val result: String, private val words: CharArray) {
     companion object {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> {
             return listOf<Array<Any>>(
-                    arrayOf("here", "hello"),
-                    arrayOf("world hello", "hello world"),
-                    arrayOf("here world hello", "hello world here"),
-                    arrayOf("are we here world hello", "hello world here we are"))
+                    arrayOf("hello", "hello".toCharArray()),
+                    arrayOf("world hello", "hello world".toCharArray()),
+                    arrayOf("here world hello", "hello world here".toCharArray()),
+                    arrayOf("are we here world hello", "hello world here we are".toCharArray()))
         }
     }
 
     @Test
     fun solution() {
-        Assert.assertEquals("Reversed word of $words should be $result", result, Day113.solution(words))
+        val msg = "Reversed word of ${String(words)} should be $result"
+        Day113.solution(words)
+        Assert.assertEquals(msg, result, String(words))
     }
 }
