@@ -14,22 +14,6 @@ You may augment the node to add parent pointers or any other property you would 
 */
 object Day24 {
     class LockedTreeNode<T>(value: T) : TreeNode<T>(value) {
-        private var parent: LockedTreeNode<T>? = null
-
-        override var left: TreeNode<T>?
-            get() = super.left
-            set(value) {
-                super.left = value
-                (value as LockedTreeNode<T>?)?.parent = this
-            }
-
-        override var right: TreeNode<T>?
-            get() = super.right
-            set(value) {
-                super.right = value
-                (value as LockedTreeNode<T>?)?.parent = this
-            }
-
         var lockCount = 0
 
         // when a node is locked, increases its lockCount and the lockCount of all its ancestors
@@ -45,7 +29,7 @@ object Day24 {
         // when a node is unlocked, decreases its lockCount and the lockCount of all its ancestors
         private fun lockChain() {
             ++lockCount
-            parent?.lockChain()
+            (parent as LockedTreeNode<T>?)?.lockChain()
         }
 
         fun unlock(): Boolean {
@@ -59,7 +43,7 @@ object Day24 {
 
         private fun unlockChain() {
             --lockCount
-            parent?.unlockChain()
+            (parent as LockedTreeNode<T>?)?.unlockChain()
         }
 
         // when a node is locked, it increases its lockCount and the lockCount of all its ancestors. Hence a node is locked if its lockCount is greater than the sum of the lockCounts of its children

@@ -2,7 +2,19 @@ package com.formichelli.dailycodingproblem.util
 
 open class TreeNode<T>(val value: T) {
     open var left: TreeNode<T>? = null
+        set(value) {
+            field = value
+            value?.parent = this
+        }
     open var right: TreeNode<T>? = null
+        set(value) {
+            field = value
+            value?.parent = this
+        }
+    var parent: TreeNode<T>? = null
+        private set(value) {
+            field = value
+        }
 
     override fun equals(other: Any?): Boolean {
         if (other !is TreeNode<*>)
