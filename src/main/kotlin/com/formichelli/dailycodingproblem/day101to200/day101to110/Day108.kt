@@ -7,6 +7,27 @@ For example, if A is abcde and B is cdeab, return true. If A is abc and B is acb
 */
 object Day108 {
     fun solution(A: String, B: String): Boolean {
-        TODO()
+        if (A.length != B.length) {
+            return false
+        }
+
+        val strLen = A.length
+
+        var found = true
+        for (i in 0 until strLen) {
+            found = true
+            for (j in 0 until strLen) {
+                if (A[j] != B[(i + j) % strLen]) {
+                    found = false
+                    break
+                }
+            }
+
+            if (found) {
+                break
+            }
+        }
+
+        return found
     }
 }
