@@ -9,6 +9,6 @@ Bonus: Can you do this in one line?
 */
 object Day109 {
     fun solution(number: Int): Int{
-        TODO()
+        return number.and(0b01010101).shl(1).or(number.and(0b10101010).shr(1))
     }
 }

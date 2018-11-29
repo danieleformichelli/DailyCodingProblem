@@ -19,6 +19,6 @@ class Day109Test(private val result: Int, private val number: Int) {
 
     @Test
     fun solution() {
-        Assert.assertEquals("Swapped $number should be $result", result, Day109.solution(result))
+        Assert.assertEquals("Swapped $number should be $result", result, Day109.solution(number))
     }
 }
