@@ -13,7 +13,7 @@ class Day111Test(private val result: List<Int>, private val W: String, private v
         fun data(): Collection<Array<Any>> {
             return listOf(
                     arrayOf(listOf(0, 3, 4), "ab", "abxaba"),
-                    arrayOf(listOf(0, 1), "abx", "abxaba"))
+                    arrayOf(listOf(0, 1, 2), "abx", "abxaba"))
         }
     }
 
