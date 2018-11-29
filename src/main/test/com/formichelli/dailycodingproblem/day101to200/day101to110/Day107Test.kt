@@ -17,9 +17,10 @@ class Day107Test(private val result: List<Int>, private val root: TreeNode<Int>)
             root.right = TreeNode(3)
             root.right?.left = TreeNode(4)
             root.right?.right = TreeNode(5)
+            root.right?.left?.right = TreeNode(6)
 
             return listOf(
-                    arrayOf(listOf(1, 2, 3, 4, 5), root))
+                    arrayOf(listOf(1, 2, 3, 4, 5, 6), root))
         }
     }
 
