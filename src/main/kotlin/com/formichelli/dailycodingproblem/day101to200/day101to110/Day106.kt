@@ -7,6 +7,10 @@ For example, [2, 0, 1, 0] returns true while [1, 1, 0, 1] returns false.
 */
 object Day106 {
     fun solution(numbers: List<Int>): Boolean {
-        TODO()
+        var i = 0
+        while (numbers[i] != 0) {
+            i += numbers[i]
+        }
+        return i == numbers.lastIndex
     }
 }
