@@ -58,7 +58,8 @@ object Day17 {
             }
 
             for (i in 0 until -fileLevelDifference + 1) {
-                currentFileSystemNode = currentFileSystemNode.parent ?: throw IllegalArgumentException("Invalid filesystem")
+                currentFileSystemNode = currentFileSystemNode.parent
+                        ?: throw IllegalArgumentException("Invalid filesystem")
             }
 
             val fileNode = FileSystemNode(fileName, currentFileSystemNode)

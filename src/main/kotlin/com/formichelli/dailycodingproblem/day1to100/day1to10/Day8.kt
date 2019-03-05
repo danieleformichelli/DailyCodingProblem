@@ -33,12 +33,9 @@ object Day8 {
         val (rightUnivalTreeValue, rightUnivalTreeCount) = univalTreeCount(head.right)
 
         var univalTreeCount = leftUnivalTreeCount!! + rightUnivalTreeCount!!
-        if (head.value == leftUnivalTreeValue && head.value == rightUnivalTreeValue)
-        {
+        if (head.value == leftUnivalTreeValue && head.value == rightUnivalTreeValue) {
             return listOf(head.value, univalTreeCount + 1)
-        }
-        else
-        {
+        } else {
             return listOf(null, univalTreeCount)
         }
     }
