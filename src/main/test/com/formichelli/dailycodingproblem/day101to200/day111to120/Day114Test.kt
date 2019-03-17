@@ -11,10 +11,11 @@ class Day114Test(private val result: String, private val words: String, private 
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> {
-            return listOf<Array<Any>>(
+            return listOf(
                     arrayOf("here/world:hello", "hello/world:here", setOf('/', ':')),
                     arrayOf("/here:world/hello", "hello/world:here/", setOf('/', ':')),
-                    arrayOf("here/world/:hello", "hello//world:here", setOf('/', ':')))
+                    arrayOf("here/world/:hello", "hello//world:here", setOf('/', ':')),
+                    arrayOf("here/world/:hello/", "/hello/:world/here", setOf('/', ':')))
         }
     }
 
