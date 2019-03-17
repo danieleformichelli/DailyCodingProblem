@@ -12,7 +12,7 @@ open class TreeNode<T>(val value: T) {
             value?.parent = this
         }
     var parent: TreeNode<T>? = null
-        private set(value) {
+        internal set(value) {
             field = value
         }
 
