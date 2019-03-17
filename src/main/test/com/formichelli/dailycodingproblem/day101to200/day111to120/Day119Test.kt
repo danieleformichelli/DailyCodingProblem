@@ -12,7 +12,9 @@ class Day119Test(private val result: Set<Int>, private val intervals: Set<Pair<I
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> {
             return listOf<Array<Any>>(
-                    arrayOf(setOf(3, 6), setOf(Pair(0, 3), Pair(2, 6), Pair(3, 4), Pair(6, 9))))
+                    arrayOf(setOf(3, 6), setOf(Pair(0, 3), Pair(2, 6), Pair(3, 4), Pair(6, 9))),
+                    arrayOf(setOf(6), setOf(Pair(0, 11), Pair(2, 6), Pair(3, 7), Pair(6, 9))),
+                    arrayOf(setOf(0, 2, 5, 8), setOf(Pair(0, 1), Pair(2, 4), Pair(5, 7), Pair(8, 9))))
         }
     }
 
