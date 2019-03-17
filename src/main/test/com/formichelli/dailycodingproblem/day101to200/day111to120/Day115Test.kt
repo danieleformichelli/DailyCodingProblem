@@ -28,7 +28,8 @@ class Day115Test(private val result: Boolean, private val s: TreeNode<Int>, priv
             anotherRoot.right?.right?.right = TreeNode(8)
 
             return listOf<Array<Any?>>(
-                    arrayOf(true, root, root.right!!),
+                    arrayOf(true, root, root),
+                    arrayOf(true, root, root.right),
                     arrayOf(false, root, anotherRoot))
         }
     }
