@@ -12,7 +12,7 @@ class Day117Test(private val result: Int, private val root: TreeNode<Int>) {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any?>> {
-            val root1 = TreeNode(10)
+            val root1 = TreeNode(11)
             root1.left = TreeNode(20)
             root1.left?.left = TreeNode(1)
             root1.right = TreeNode(30)
