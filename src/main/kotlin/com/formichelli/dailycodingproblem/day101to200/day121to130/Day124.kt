@@ -7,6 +7,7 @@ Write a function that, given n, returns the number of rounds you'd expect to pla
 */
 object Day124 {
     fun solution(n: Int): Int {
-        TODO("not implemented")
+        // at each step we discard half of the coins, hence the expected number of times is log2(N)
+        return Math.ceil(Math.log(n.toDouble()) / Math.log(2.0)).toInt()
     }
 }

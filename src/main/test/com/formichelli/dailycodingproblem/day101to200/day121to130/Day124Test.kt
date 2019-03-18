@@ -6,13 +6,14 @@ import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 
 @RunWith(Parameterized::class)
-class Day124Test(private val result: Boolean, private val n: Int) {
+class Day124Test(private val result: Int, private val n: Int) {
     companion object {
         @JvmStatic
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> {
             return listOf<Array<Any>>(
-                    arrayOf(3, 100))
+                    arrayOf(7, 100),
+                    arrayOf(10, 1024))
         }
     }
 
