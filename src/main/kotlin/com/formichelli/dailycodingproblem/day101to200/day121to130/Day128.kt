@@ -1,5 +1,7 @@
 package com.formichelli.dailycodingproblem.day101to200.day121to130
 
+import java.util.*
+
 /*
 The Tower of Hanoi is a puzzle game with three rods and n disks, each a different size.
 
@@ -23,7 +25,56 @@ Move 2 to 3
 Move 1 to 3
 */
 object Day128 {
+    private class HanoiTower(private val n: Int, val id: Int, fill: Boolean = false) {
+        val disks: Stack<Int> = Stack()
+
+        init {
+            if (fill) {
+                for (i in n downTo 1) {
+                    disks.push(i)
+                }
+            }
+        }
+
+        fun pushDisk(diskSize: Int): Boolean {
+            if (disks.size == n || (!disks.isEmpty() && disks.peek() >= diskSize)) {
+                return false
+            }
+
+            disks.push(diskSize)
+            return true
+        }
+
+        fun popDisk(): Int {
+            return if (!disks.isEmpty()) {
+                disks.pop()
+            } else {
+                -1
+            }
+        }
+    }
+
     fun solution(n: Int): List<Pair<Int, Int>> {
-        TODO("not implemented")
+        val towers = Array(3) { HanoiTower(n, it + 1, it == 0) }
+
+        val result = ArrayList<Pair<Int, Int>>()
+        moveDisks(n, towers[0], towers[2], towers[1], result)
+        return result
+    }
+
+    private fun moveDisks(n: Int, from: HanoiTower, to: HanoiTower, through: HanoiTower, result: ArrayList<Pair<Int, Int>>) {
+        if (n == 0) {
+            return
+        }
+
+        // move the top n-1 disks to through using to as buffer
+        moveDisks(n - 1, from, through, to, result)
+
+        // move the bottom disk to to
+        result.add(Pair(from.id, to.id))
+        to.pushDisk(from.popDisk())
+
+        // move the remaining n-1 disks from through to to using from as buffer
+        moveDisks(n - 1, through, to, from, result)
     }
 }
