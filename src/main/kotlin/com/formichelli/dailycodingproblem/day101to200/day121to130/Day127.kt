@@ -22,6 +22,32 @@ return 124 (99 + 25) as:
 */
 object Day127 {
     fun solution(a: ListNode<Int>, b: ListNode<Int>): ListNode<Int> {
-        TODO("not implemented")
+        var result: ListNode<Int>? = null
+        var currentNode: ListNode<Int>? = null
+        var carry = 0
+        var currentA: ListNode<Int>? = a
+        var currentB: ListNode<Int>? = b
+
+        while (currentA != null || currentB != null) {
+            val sum = (currentA?.value ?: 0) + (currentB?.value ?: 0) + carry
+            carry = sum / 10
+            val nextNode = ListNode(sum % 10, null, currentNode)
+            if (currentNode != null) {
+                currentNode.next = nextNode
+            } else {
+                result = nextNode
+            }
+
+            currentA = currentA?.next
+            currentB = currentB?.next
+            currentNode = nextNode
+        }
+
+        if (carry != 0) {
+            val carryNode = ListNode(carry, null, currentNode)
+            currentNode!!.next = carryNode
+        }
+
+        return result!!
     }
 }
