@@ -6,7 +6,26 @@ Given an array of numbers representing the stock prices of a company in chronolo
 For example, given k = 2 and the array [5, 2, 4, 0, 1], you should return 3.
 */
 object Day130 {
-    fun solution(k: Int, prices: IntArray): Int {
-        TODO("not implemented")
+    fun solution(prices: IntArray, k: Int): Int {
+        // maxProfit[i] = max profit on day i doing n transactions
+        var maxProfit = IntArray(prices.size)
+
+        for (transactions in 1..k) {
+            val maxProfitNextTransaction = IntArray(prices.size)
+
+            var maxProfitBeforeTodayOneShareAndOneTransactionLeft = Integer.MIN_VALUE
+
+            for (j in 1 until prices.size) {
+                val maxProfitNotUsingJ = maxProfitNextTransaction[j - 1]
+
+                maxProfitBeforeTodayOneShareAndOneTransactionLeft = Math.max(maxProfitBeforeTodayOneShareAndOneTransactionLeft, maxProfit[j - 1] - prices[j - 1])
+                val maxProfitUsingJ = maxProfitBeforeTodayOneShareAndOneTransactionLeft + prices[j]
+                maxProfitNextTransaction[j] = Math.max(maxProfitNotUsingJ, maxProfitUsingJ)
+            }
+
+            maxProfit = maxProfitNextTransaction
+        }
+
+        return maxProfit[prices.lastIndex]
     }
 }
