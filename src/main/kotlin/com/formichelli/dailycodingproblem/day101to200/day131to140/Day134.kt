@@ -1,5 +1,7 @@
 package com.formichelli.dailycodingproblem.day101to200.day131to140
 
+import java.util.*
+
 /*
 You have a large array with most of the elements as zero.
 
@@ -10,17 +12,38 @@ set(i, val): updates index at i with val.
 get(i): gets the value at index i.
 */
 object Day134 {
-    class SparseArray {
-        fun init(largeArray: IntArray) {
-            TODO("not implemented")
+    class SparseArray(largeArray: IntArray) {
+        private val size: Int = largeArray.size
+        private val arrayValues = HashMap<Int, Int>()
+
+        init {
+            largeArray.forEachIndexed { index, value ->
+                if (value != 0) {
+                    arrayValues[index] = value
+                }
+            }
         }
 
         fun set(i: Int, value: Int) {
-            TODO("not implemented")
+            checkIndex(i)
+
+            if (value != 0) {
+                arrayValues[i] = value
+            } else {
+                arrayValues.remove(i)
+            }
         }
 
         fun get(i: Int): Int {
-            TODO("not implemented")
+            checkIndex(i)
+
+            return arrayValues.getOrDefault(i, 0)
+        }
+
+        private fun checkIndex(i: Int) {
+            if (i < 0 || i >= size) {
+                throw IndexOutOfBoundsException(i)
+            }
         }
     }
 }
