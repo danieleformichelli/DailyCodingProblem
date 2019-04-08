@@ -17,6 +17,18 @@ For example, the minimum path in this tree is [10, 5, 1, -1], which has sum 15.
 */
 object Day135 {
     fun solution(root: TreeNode<Int>): Int {
-        TODO("not implemented")
+        return solutionHelper(root)
+    }
+
+    private fun solutionHelper(current: TreeNode<Int>?): Int {
+        if (current == null) {
+            return Int.MAX_VALUE
+        }
+
+        if (current.left == null && current.right == null) {
+            return current.value
+        }
+
+        return current.value + Math.min(solutionHelper(current.left), solutionHelper(current.right))
     }
 }
