@@ -19,17 +19,29 @@ class PeekableInterface(object):
         pass
 */
 object Day139 {
-    class PeekableInterface<T>(val iterator: Iterator<T>) {
+    class PeekableInterface<T>(private val iterator: Iterator<T>) {
+        private var peeked: T? = null
+
         fun peek(): T {
-            TODO("not implemented")
+            if (peeked == null) {
+                peeked = next()
+            }
+
+            return peeked!!
         }
 
         fun next(): T {
-            TODO("not implemented")
+            if (peeked != null) {
+                val peekedValue = peeked!!
+                peeked = null
+                return peekedValue
+            }
+
+            return iterator.next()
         }
 
-        fun hasNext(): T {
-            TODO("not implemented")
+        fun hasNext(): Boolean {
+            return peeked != null || iterator.hasNext()
         }
     }
 }

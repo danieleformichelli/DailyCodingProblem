@@ -12,7 +12,11 @@ class Day138Test(private val result: Int, private val cents: Int) {
         @Parameterized.Parameters
         fun data(): Collection<Array<Any>> {
             return listOf(
-                    arrayOf<Any>(3, 16))
+                    arrayOf<Any>(2, 15),
+                    arrayOf<Any>(3, 16),
+                    arrayOf<Any>(4, 17),
+                    arrayOf<Any>(5, 18),
+                    arrayOf<Any>(1, 25))
         }
     }
 
