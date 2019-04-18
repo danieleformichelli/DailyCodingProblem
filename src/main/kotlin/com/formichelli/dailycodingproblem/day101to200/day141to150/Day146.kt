@@ -25,6 +25,26 @@ We do not remove the tree at the root or its left child because it still has a 1
 */
 object Day146 {
     fun <T> solution(root: TreeNode<T>): TreeNode<T> {
-        TODO("not implemented")
+        solutionHelper(root)
+        return root
+    }
+
+    private fun <T> solutionHelper(currentNode: TreeNode<T>?): Boolean {
+        if (currentNode == null) return true
+        val leftIsZero = solutionHelper(currentNode.left)
+        val rightIsZero = solutionHelper(currentNode.right)
+        if (currentNode.value == 0 && leftIsZero && rightIsZero) {
+            // prune
+            val parent = currentNode.parent
+            when {
+                parent == null -> return true
+                currentNode == parent.left -> parent.left = null
+                currentNode == parent.right -> parent.right = null
+            }
+
+            return true
+        } else {
+            return false
+        }
     }
 }
