@@ -9,6 +9,29 @@ For example, given 1 -> 2 -> 3 -> 4, return 2 -> 1 -> 4 -> 3.
 */
 object Day145 {
     fun <T> solution(list: ListNode<T>): ListNode<T> {
-        TODO("not implemented")
+        return solutionHelper(list)!!
+    }
+
+    private fun <T> solutionHelper(list: ListNode<T>?): ListNode<T>? {
+        if (list == null) {
+            return null
+        }
+
+        if (list.next == null) {
+            return list
+        }
+
+        val remaining = solutionHelper(list.next)
+
+        val first = list.next
+        val second = list
+
+        first?.next = second
+        second.prev = first
+
+        second.next = remaining
+        remaining?.prev = second
+
+        return first
     }
 }
