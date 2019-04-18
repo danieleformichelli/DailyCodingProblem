@@ -10,7 +10,34 @@ If two distances to larger numbers are the equal, then return any one of them. I
 Follow-up: If you can preprocess the array, can you do this in constant time?
 */
 object Day144 {
-    fun solution(numbers: IntArray, i: Int): Int {
-        TODO("not implemented")
+    fun solution(numbers: IntArray, i: Int): Int? {
+        val resultArray = preprocess(numbers)
+        return resultArray[i]
+    }
+
+    private fun preprocess(numbers: IntArray): Array<Int?> {
+        val result = Array<Int?>(numbers.size) { null }
+        for (i in 0 until numbers.size) {
+            result[i] = findNearestBigger(numbers, i)
+        }
+
+        return result
+    }
+
+    private fun findNearestBigger(numbers: IntArray, i: Int): Int? {
+        var j = 1
+        do {
+            val lowerIndex = i - j
+            val upperIndex = i + j
+            if (lowerIndex >= 0 && numbers[lowerIndex] > numbers[i]) {
+                return lowerIndex
+            } else if (upperIndex < numbers.size && numbers[upperIndex] > numbers[i]) {
+                return upperIndex
+            }
+
+            ++j
+        } while (lowerIndex >= 0 || upperIndex < numbers.size)
+
+        return null
     }
 }
