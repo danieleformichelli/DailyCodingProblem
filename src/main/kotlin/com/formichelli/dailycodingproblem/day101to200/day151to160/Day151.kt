@@ -17,7 +17,32 @@ G G G
 B B B
 */
 object Day151 {
-    fun solution(image: Array<CharArray>, pixel: Pair<Int, Int>, color: Char) {
-        TODO("not implemented")
+    fun solution(image: Array<CharArray>, pixel: Pair<Int, Int>, color: Char): Array<CharArray> {
+        if (image[pixel.first][pixel.second] == color) {
+            return image
+        }
+
+        solutionHelper(image, pixel, color, image[pixel.first][pixel.second])
+        return image
+    }
+
+    private fun solutionHelper(image: Array<CharArray>, pixel: Pair<Int, Int>, newColor: Char, colorToReplace: Char) {
+        if (pixel.first < 0 || pixel.first >= image.size) {
+            return
+        }
+
+        if (pixel.second < 0 || pixel.second >= image[pixel.first].size) {
+            return
+        }
+
+        if (image[pixel.first][pixel.second] != colorToReplace) {
+            return
+        }
+
+        image[pixel.first][pixel.second] = newColor
+        solutionHelper(image, Pair(pixel.first - 1, pixel.second), newColor, colorToReplace)
+        solutionHelper(image, Pair(pixel.first + 1, pixel.second), newColor, colorToReplace)
+        solutionHelper(image, Pair(pixel.first, pixel.second - 1), newColor, colorToReplace)
+        solutionHelper(image, Pair(pixel.first, pixel.second + 1), newColor, colorToReplace)
     }
 }
