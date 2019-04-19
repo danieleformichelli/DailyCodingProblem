@@ -9,6 +9,21 @@ For example, for n = 2, one gray code would be [00, 01, 11, 10].
 */
 object Day148 {
     fun solution(n: Int): List<Int> {
-        TODO("not implemented")
+        return solutionHelper(n)
+    }
+
+    private fun solutionHelper(n: Int): MutableList<Int> {
+        if (n == 1) {
+            return mutableListOf(0, 1)
+        }
+
+        val codes = solutionHelper(n - 1)
+        val mask = 1.shl(n - 1)
+        for (i in codes.lastIndex downTo 0) {
+            // add ocdes from n-1 in reversed order and add a 1 before them
+            codes.add(codes[i].or(mask))
+        }
+
+        return codes
     }
 }
