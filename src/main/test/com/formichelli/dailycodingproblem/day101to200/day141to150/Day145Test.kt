@@ -19,6 +19,6 @@ class Day145Test(private val result: List<Int>, private val numbers: List<Int>) 
 
     @Test
     fun solution() {
-        Assert.assertEquals("Swapped list of $numbers is $result", result.toList(), Day145.solution(ListNode.fromList(numbers)).toList())
+        Assert.assertEquals("Swapped list of $numbers is $result", result, Day145.solution(ListNode.fromList(numbers)).toList())
     }
 }
