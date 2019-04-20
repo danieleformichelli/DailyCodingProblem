@@ -7,6 +7,15 @@ For example, carrace should return true, since it can be rearranged to form race
 */
 object Day157 {
     fun solution(string: String): Boolean {
-        TODO("not implemented")
+        val oddChars = HashSet<Char>()
+        string.forEach {
+            if (oddChars.contains(it)) {
+                oddChars.remove(it)
+            } else {
+                oddChars.add(it)
+            }
+        }
+
+        return oddChars.size < 2
     }
 }
