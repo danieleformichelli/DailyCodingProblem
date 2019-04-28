@@ -9,9 +9,8 @@
     <version>1.0.0-SNAPSHOT</version>
 
     <properties>
-        <kotlin.version>1.3.21</kotlin.version>
+        <kotlin.version>1.3.31</kotlin.version>
     </properties>
-
 
     <build>
         <testSourceDirectory>src/main/test</testSourceDirectory>
