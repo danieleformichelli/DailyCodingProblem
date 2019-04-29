@@ -1,5 +1,7 @@
 package com.formichelli.dailycodingproblem.day101to200.day161to170
 
+import java.util.*
+
 /*
 Given an arithmetic expression in Reverse Polish Notation, write a program to evaluate it.
 
@@ -11,6 +13,35 @@ You can assume the given expression is always valid.
 */
 object Day163 {
     fun solution(expression: List<String>): Int {
-        TODO("not implemented")
+        val values = Stack<Int>()
+        for (element in expression) {
+            when (element) {
+                "+" -> {
+                    val secondOperand = values.pop()
+                    val firstOperand = values.pop()
+                    values.push(firstOperand + secondOperand)
+                }
+                "-" -> {
+                    val secondOperand = values.pop()
+                    val firstOperand = values.pop()
+                    values.push(firstOperand - secondOperand)
+                }
+                "*" -> {
+                    val secondOperand = values.pop()
+                    val firstOperand = values.pop()
+                    values.push(firstOperand * secondOperand)
+                }
+                "/" -> {
+                    val secondOperand = values.pop()
+                    val firstOperand = values.pop()
+                    values.push(firstOperand / secondOperand)
+                }
+                else -> {
+                    values.push(element.toInt())
+                }
+            }
+        }
+
+        return values.pop()
     }
 }
