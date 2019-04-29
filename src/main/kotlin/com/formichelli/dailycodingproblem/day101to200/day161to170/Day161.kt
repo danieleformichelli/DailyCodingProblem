@@ -7,6 +7,6 @@ For example, given the binary number 1111 0000 1111 0000 1111 0000 1111 0000, re
 */
 object Day161 {
     fun solution(number: Int): Int {
-        TODO("not implemented")
+        return number.inv()
     }
 }
