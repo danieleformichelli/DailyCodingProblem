@@ -5,6 +5,14 @@ You are given an array of length n + 1 whose elements belong to the set {1, 2, .
 */
 object Day164 {
     fun solution(numbers: List<Int>): Int {
-        TODO("not implemented")
+        val found = BooleanArray(numbers.size)
+        numbers.forEach {
+            if (found[it]) {
+                return it
+            }
+            found[it] = true
+        }
+
+        throw IllegalArgumentException("No duplicates found")
     }
 }
