@@ -9,12 +9,27 @@ For example, given the input [[1, 2], [3], [], [4, 5, 6]], calling next() repeat
 */
 object Day166 {
     class Iterator2D<T>(val values: Array<Array<T>>) {
+        private val outerIterator = values.iterator()
+        private var innerIterator = outerIterator.next().iterator()
+
         fun next(): T {
-            TODO("not implemented")
+            while (!innerIterator.hasNext()) {
+                innerIterator = outerIterator.next().iterator()
+            }
+
+            return innerIterator.next()
         }
 
         fun hasNext(): Boolean {
-            TODO("not implemented")
+            while (!innerIterator.hasNext()) {
+                if (outerIterator.hasNext()) {
+                    innerIterator = outerIterator.next().iterator()
+                } else {
+                    return false
+                }
+            }
+
+            return true
         }
     }
 }
