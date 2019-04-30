@@ -11,7 +11,18 @@ There is 1 smaller element to the right of 6
 There are no smaller elements to the right of 1
 */
 object Day165 {
-    fun solution(numbers: List<Int>): List<Int> {
-        TODO("not implemented")
+    fun solution(numbers: IntArray): IntArray {
+        val result = IntArray(numbers.size)
+        val numbersFromRight = ArrayList<Int>()
+        numbersFromRight.add(numbers.last())
+        for (i in numbers.lastIndex - 1 downTo 0) {
+            val number = numbers[i]
+            // assuming no duplicates
+            val insertionIndex = -numbersFromRight.binarySearch(number) - 1
+            numbersFromRight.add(insertionIndex, number)
+            result[i] = insertionIndex
+        }
+
+        return result
     }
 }
