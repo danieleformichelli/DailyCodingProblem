@@ -1,5 +1,6 @@
 package com.formichelli.dailycodingproblem.day101to200.day161to170
 
+import com.formichelli.dailycodingproblem.util.TrieNode
 import kotlin.streams.toList
 
 /*
@@ -20,7 +21,7 @@ apr
 f
 */
 object Day162 {
-    data class TrieNode(var word: String? = null, val next: MutableMap<Char, TrieNode> = HashMap())
+
 
     fun solution(words: List<String>): List<String> {
         val shortestPrefixes = HashMap<String, String>()
