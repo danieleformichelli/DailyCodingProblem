@@ -39,6 +39,6 @@ class Day168Test(private val result: Array<Array<Int>>, private val matrix: Arra
 
     @Test
     fun solution() {
-        Assert.assertEquals("Rotated ${Utils.prettyPrint(matrix)} is ${Utils.prettyPrint(result)}", result, Day168.solution(matrix))
+        Assert.assertArrayEquals("Rotated ${Utils.prettyPrint(matrix)} is ${Utils.prettyPrint(result)}", result, Day168.solution(matrix))
     }
 }
