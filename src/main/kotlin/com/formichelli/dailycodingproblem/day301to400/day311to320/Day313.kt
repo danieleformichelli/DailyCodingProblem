@@ -8,7 +8,7 @@ In addition, the lock has a certain number of "dead ends", meaning that if you t
 Let us consider a "move" to be a rotation of a single wheel by one digit, in either direction. Given a lock initially set to 000, a target combination, and a list of dead ends, write a function that returns the minimum number of moves required to reach the target state, or None if this is impossible.
 */
 object Day313 {
-    fun solution(target: Int, List<Int> deadEnds): Int {
+    fun solution(target: Int, deadEnds: List<Int>): Int {
         TODO("not implemented")
     }
 }
