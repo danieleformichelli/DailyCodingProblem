@@ -21,8 +21,6 @@ If you don't have three numbers yet, append zeros until you do. Keep the first t
 Using this scheme, Jackson and Jaxen both map to J250.
 
 Implement Soundex.
-
-
 */
 object Day349 {
     fun solution(name: String): String {

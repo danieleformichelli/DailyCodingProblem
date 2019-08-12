@@ -13,7 +13,7 @@ This should call add on the initial value with the first element of the array, a
 Implement your own version of reduce.
 */
 object Day342 {
-    fun <T> solution(values: Array<T>, func: (T, T) -> T, initialValue: T): T{
+    fun <T> solution(values: Array<T>, func: (T, T) -> T, initialValue: T): T {
         TODO("not implemented")
     }
 }
